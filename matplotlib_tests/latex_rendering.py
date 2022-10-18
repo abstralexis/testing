@@ -5,6 +5,7 @@
 # and get a better representation of maths in a conversation.
 #
 # Make sure you have TeX Live installed first... and that takes a while
+# Or install MiKTeX like a sane person (much better)
 
 import matplotlib.pyplot as plt # Main plotting stuff  
 from matplotlib import rcParams # Thingy for changing parameters n stuff
