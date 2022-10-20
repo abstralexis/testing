@@ -10,7 +10,7 @@ winget install vscodium
 winget install vscodium
 ```
 
-# batch
+## batch
 ```bat
 winget install vscodium
 ```
