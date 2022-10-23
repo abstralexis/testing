@@ -2,17 +2,22 @@
 # documented now. Ugh.
 
 import discord
+from discord.ext import commands
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.messages = True
-client = discord.Client(intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents)
 
-@client.event
+@bot.command()
+async def latex(ctx, expr: str):
+    ctx.send(expr)
+
+@bot.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'We have logged in as {bot.user}')
 
-@client.event
+@bot.event
 async def on_message(message):
     """
     Interact with Discord's API such that when a message is sent
@@ -20,11 +25,11 @@ async def on_message(message):
     clause, then checks if the content of the message has a command.
     If the message starts with a command, the bot sends a message. 
     """
-    if message.author == client.user:
+    if message.author == bot.user:
         return
 
     if message.content.startswith('$latex'):
         query = message.content()
 
 # Run bot with discord login token
-client.run('your token here')
+bot.run('your token here')
