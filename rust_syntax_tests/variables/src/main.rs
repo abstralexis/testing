@@ -1,3 +1,6 @@
+// Turn off warning for demonstration purposes
+#![allow(unused_assignments)]
+
 fn main() {
     /*
     This is for demonstrating syntax for declaring variables
