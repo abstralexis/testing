@@ -1,3 +1,7 @@
+// Don't use this normally. This is just to avoid the yellow dots and lines.
+#![allow(unused_mut)]
+#![allow(unused_variables)]
+
 /*
 This is to explore how functions work in Rust with some basic
 examples
