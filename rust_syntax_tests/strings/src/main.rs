@@ -1,17 +1,19 @@
 struct Strings<'a> {
-    string: String,
-    borrowstr: &'a str,
+    _string: String,
+    _borrowstr: &'a str,
 }
 impl<'a> Strings<'a> {
     pub fn new(string: String, borrowstr: &'a str) -> Self {
-        Strings { string: string, borrowstr: borrowstr }
+        Strings { _string: string, _borrowstr: borrowstr }
     }
 
     pub fn get_string(&self) -> String {
-        return self.string.to_owned() + self.borrowstr;
+        return self._string.to_owned() + self._borrowstr;
     }
 }
 
 fn main() { 
-    println!("Hello, world!");
+    let strings: Strings = Strings::new(String::from("Hello "), "World!");
+    let strings_string: String = strings.get_string();
+    println!("{}", strings_string);
 }
