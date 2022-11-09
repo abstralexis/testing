@@ -4,7 +4,7 @@
  */
 
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdbool.h>        // Bools are a standard language feature in C++
 
 int main(int argc, char **argv) {
     // Basic int stuff
