@@ -14,10 +14,12 @@ rcParams['text.usetex'] = True  # Set it so that you can use LaTeX rendering
 plt.style.use('dark_background')    # Dark mode !!!
 
 latex_expression = r"""
-The point $(h, k)$ lies on $f(x)$.
-Any transformation of $f(x)$ in the form
-$af(bx + c) + d$ results in the transformation
-of the point $(h, k)$ to $(\frac{h - c}{b}, ak + d)$.  
+To translate coordinates from Computer Graphics to
+Cartesian, with the origin at the centre, given the
+screen width ($w$) and height ($h$):
+$f(a, b) = (a - \frac{w}{2}, b - \frac{h}{2}), 0 \leq a \leq w, 0 \leq b \leq h$
+Therefore:
+$f'(a, b) = (a + \frac{w}{2}, b + \frac{h}{2}), -\frac{w}{2} \leq a \leq \frac{w}{2}, -\frac{h}{2} \leq b \leq \frac{h}{2}$
 """ # Some LaTeX expr that you can pass
 
 plt.text(0.01, 0.5, latex_expression, fontsize=18)   # Render the LaTeX text
