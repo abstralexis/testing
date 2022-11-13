@@ -7,13 +7,13 @@ h = 750
 
 # f(x, y )--- Takes in pygame coordinates and translates to cartesian
 # This is so maths makes more sense with it
-def to_cartesian(x: int, y: int):
-    return x, h-y
+def to_cartesian(p: int, q: int):
+    return p, h - q
 
 # f'(x, y) --- Takes in cartesian coordinates and translates to pygame
 # Cartesian values that have been calculated can be put in here
-def to_pgcoords(x: int, y: int):
-    return x, h-y
+def to_pgcoords(p: int, q: int):
+    return p, h - q
 
 # --- Note how they are the same just abstracted ---
 
