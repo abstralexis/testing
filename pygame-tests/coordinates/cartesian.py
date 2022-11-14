@@ -1,7 +1,7 @@
 import pygame, sys
 
-w = 500
-h = 750
+w = 200
+h = 300
 
 # --- The translation layer ---
 
@@ -37,6 +37,8 @@ def main():
         # Adding 2 to the y value for visual representation
         # because pygame renders the pixels downwards
         pygame.draw.line(win, (0,255,0), to_pgcoords(0,2), to_pgcoords(w,2), width=2)
+
+        pygame.draw.line(win, (255,255,255), to_pgcoords(50,75), to_pgcoords(50,75), width=3)
 
         pygame.display.flip()
 
