@@ -6,10 +6,12 @@
 enum operators {addition, subtraction, division, multiplication};
 
 // Function prototypes
-int add(int a, int b);
+long int add(long int a, long int b);
 
-int subtract(int a, int b);
+long int subtract(long int a, long int b);
 
-int multiply(int a, int b);
+long int multiply(long int a, long int b);
 
-int divide(int a, int b);
+long int divide(long int a, long int b);
+
+long int getOperand();

@@ -3,6 +3,7 @@ This is my attempt at making a basic calculator in C
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "calculator.h"
 
@@ -12,14 +13,14 @@ int main(int argc, char **argv) {
     */
 
     // Declare variables    
-    int a = 10;
-    int b = 100;
+    long int a = 10;
+    long int b = 100;
 
     // Get outputs from mathematical functions
-    int output1 = add(a, b);
-    int output2 = subtract(a, b);
-    int output3 = multiply(a, b);
-    int output4 = divide(b, a);
+    long int output1 = add(a, b);
+    long int output2 = subtract(a, b);
+    long int output3 = multiply(a, b);
+    long int output4 = divide(b, a);
 
     // Print the outputs
     printf("The output is: %d\n", output1);
@@ -27,33 +28,49 @@ int main(int argc, char **argv) {
     printf("The output is: %d\n", output3);
     printf("The output is: %d\n", output4);
 
+    printf("\nInput an integer operand: ");
+    long int operandTest = getOperand();
+    printf("The operand is: %d\n", operandTest);
+
     return 0;
 }
 
-int add(int a, int b) {
+long int add(long int a, long int b) {
     /*
     Adds two numbers, a and b
     */
     return a + b;
 }
 
-int subtract(int a, int b) {
+long int subtract(long int a, long int b) {
     /*
     Subtracts b from a
     */
     return a - b;
 }
 
-int multiply(int a, int b) {
+long int multiply(long int a, long int b) {
     /*
     Multiplies two numbers, a and b
     */
     return a * b;
 }
 
-int divide(int a, int b) {
+long int divide(long int a, long int b) {
     /*
     Divides a by b
     */
     return a / b;
 }
+
+long int getOperand() {
+    /*
+    Gets an integer from the command line
+    */
+    char input[32];
+    char ** restrict end = &input;              // very clear syntax
+    scanf("%d", &input);                        // unsafe as balls lmaooooo
+    long int number = strtol(input, end, 32);   // how does this work ong
+    free(end);                                  // magic
+    return number;                              // yolo
+}                                               // doesnt even work lol
