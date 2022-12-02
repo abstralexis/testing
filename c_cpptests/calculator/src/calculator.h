@@ -3,7 +3,7 @@
 #endif
 
 // Operand enum
-enum operands {addition, subtraction, division, multiplication};
+enum operators {addition, subtraction, division, multiplication};
 
 // Function prototypes
 int add(int a, int b);
