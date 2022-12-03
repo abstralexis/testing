@@ -67,8 +67,8 @@ long int getOperand() {
     /*
     Gets an integer from the command line
     */
-    char input[32];
-    char ** restrict end = &input;              // very clear syntax
+    char **input[32];
+    char ** end = &input + (sizeof(char) * 32);         // very clear syntax
     scanf("%d", &input);                        // unsafe as balls lmaooooo
     long int number = strtol(input, end, 32);   // how does this work ong
     free(end);                                  // magic
