@@ -63,14 +63,14 @@ long int divide(long int a, long int b) {
     return a / b;
 }
 
+/*
+My child will write safe code
+*/
 long int getOperand() {
     /*
-    Gets an integer from the command line
+    scanf
     */
-    char **input[32];
-    char ** end = &input + (sizeof(char) * 32);         // very clear syntax
-    scanf("%d", &input);                        // unsafe as balls lmaooooo
-    long int number = strtol(input, end, 32);   // how does this work ong
-    free(end);                                  // magic
-    return number;                              // yolo
-}                                               // doesnt even work lol
+    int input;
+    scanf("%d", &input);
+    return input;                              
+}                                               
