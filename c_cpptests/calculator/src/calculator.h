@@ -17,3 +17,5 @@ long int divide(long int a, long int b);
 long int getOperand();
 
 int getOperator();
+
+long int calculate(long int a, long int b, int operator);
