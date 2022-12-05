@@ -15,27 +15,13 @@ int main(int argc, char **argv) {
     No clue why it all uses long ints, maybe because
     of some code I tried off of SO to try and get safe
     scanf int input
+
+    The safest C code, by Alexis.
     */
 
     long int operandOne = getOperand();
     long int operandTwo = getOperand();
-
-    int operator;
-    bool isValidOperator = false;
-    /* 
-    For some reason this can cause an infinite loop
-    If the input is invalid. That's C undefined
-    behaviour for ya.
-    */ 
-    while (!isValidOperator) {
-        operator = getOperator();
-        if (operator != -1) {
-            isValidOperator = true;
-        } else {
-            printf("\nInvalid operator. Try again.\n");
-        }
-    }
-
+    int operator = getOperator();    
     long int result = calculate(operandOne, operandTwo, operator);
     if (&result != NULL) { printf("Result = %d\n", result); }
     else { printf("Result was null"); }
