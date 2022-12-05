@@ -32,6 +32,10 @@ int main(int argc, char **argv) {
     long int operandTest = getOperand();
     printf("The operand is: %d\n", operandTest);
 
+    printf("\nInput an operator number (1-4, +-*/)");
+    int operator = getOperator();
+    printf("The operand is: %d\n", operator);
+
     return 0;
 }
 
@@ -73,4 +77,20 @@ long int getOperand() {
     int input;
     scanf("%d", &input);
     return input;                              
-}                                               
+}   // Lots of undefined behaviour. Fun.
+
+/*
+Please child, write safe code-
+*/
+int getOperator() {
+    /*
+    SCANF
+    */
+    int input;
+    scanf("%d", &input);
+    if (input > 0 && input <= 4) {  // If input 1-4 incl.
+        return input;
+    } else {
+        return -1;                  // -1 on invalid
+    }
+}   // Uses the undefined behaviour in a good way (maybe)

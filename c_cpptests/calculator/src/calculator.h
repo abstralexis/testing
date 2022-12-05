@@ -15,3 +15,5 @@ long int multiply(long int a, long int b);
 long int divide(long int a, long int b);
 
 long int getOperand();
+
+int getOperator();
