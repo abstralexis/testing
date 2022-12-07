@@ -1,4 +1,7 @@
-use bevy::prelude::*;
+use bevy::{
+    prelude::*,
+    window::*,
+};
 
 fn main() {
     /*
@@ -13,7 +16,16 @@ fn main() {
      *  run in parallel.
      */
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultPlugins.set(WindowPlugin {
+            window: WindowDescriptor {
+                title: "Example Title".to_string(),
+                width: 500.,
+                height: 300.,
+                present_mode: PresentMode::AutoVsync,
+                ..default()
+            },
+            ..default()
+        }))
         .add_plugin(HelloPlugin)
         .run();
 }
