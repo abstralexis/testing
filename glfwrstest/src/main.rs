@@ -5,7 +5,8 @@
  *  the graphics libraries I have looked at for 
  *  making an engine.
  */
-extern crate glfw;                  
+
+extern crate glfw;
 
 use glfw::{Action, Context, Key};
 
@@ -19,14 +20,12 @@ fn main() {
 struct Main {
     some_x: u32,
     some_y: u32,
-    vertices: Vec<f64>,
 }
 impl Main {
     fn new() -> Self {
         Main {
             some_x: 50,
             some_y: 50,
-            vertices: vec![],
         }
     }
 
@@ -39,12 +38,6 @@ impl Main {
         let (mut window, events) = 
             glfw.create_window(300, 300, "Main window", glfw::WindowMode::Windowed)
             .expect("Failed to create GLFW window.");
-    
-        self.vertices = vec![
-            -0.5, -0.5, 0.0,
-            0.5, -0.5, 0.0,
-            0.0, 0.5, 0.0
-        ];
 
         // Make the window poll inputs
         window.set_key_polling(true);
