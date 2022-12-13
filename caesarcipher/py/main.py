@@ -37,7 +37,9 @@ def decrypt(ciphertext: str, key: int) -> str:
     return plaintext
 
 def main():
-    print(encrypt("Hello World!", 2))
+    print(encrypt("THE SUN HAS GOT ITS HAT ON", 7))
+    print(decrypt("MNU MNU MTTWFD", 5))
+    print(decrypt("GUVF VF ZL FRPERG ZRFFNTR", 13))
     print(decrypt(encrypt("Hello World!", 2), 2))
 
 if __name__ == "__main__":
