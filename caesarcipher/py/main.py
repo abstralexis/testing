@@ -36,11 +36,18 @@ def decrypt(ciphertext: str, key: int) -> str:
                     plaintext += upper[index + len(upper)]
     return plaintext
 
+def brute_force(ciphertext: str) -> list[str]:
+    decryptions: list[str] = []
+    for i in range(26):
+        decryptions.append(decrypt(ciphertext, i))
+    return decryptions    
+
 def main():
     print(encrypt("THE SUN HAS GOT ITS HAT ON", 7))
     print(decrypt("MNU MNU MTTWFD", 5))
     print(decrypt("GUVF VF ZL FRPERG ZRFFNTR", 13))
     print(decrypt(encrypt("Hello World!", 2), 2))
+    print(brute_force("MNU MNU MTTWFD"))
 
 if __name__ == "__main__":
     main()
