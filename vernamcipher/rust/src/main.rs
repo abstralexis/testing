@@ -4,7 +4,10 @@
  */
 
 fn main() {
+    // Let text be the input
     let text: String = "asigfoegofbioiba82u10u".to_owned();
+    // This key is not the most secure example, but it generates
+    // a key of 0s with the same length as the plaintext.
     let key: String = vec![0; text.len()]
         .into_iter()
         .map(|x| x.to_string())
