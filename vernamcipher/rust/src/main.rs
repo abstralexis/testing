@@ -4,8 +4,11 @@
  */
 
 fn main() {
-    let text: String = "1234567890".to_owned();
-    let key: String = "qwertyuiop".to_owned();
+    let text: String = "asigfoegofbioiba82u10u".to_owned();
+    let key: String = vec![0; text.len()]
+        .into_iter()
+        .map(|x| x.to_string())
+        .collect::<String>();
     
     // Convert to a u8 representation
     let text_bin: Vec<u8> = to_binary(text);
