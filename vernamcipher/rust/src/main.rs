@@ -6,6 +6,7 @@
  use rand::prelude::*;
 
 fn main() {
+    // Let text be the input
     let text: String = "asigfoegofbioiba82u10u".to_owned();
     let key: String = gen_ascii_chars(
         text.len().try_into().unwrap()
