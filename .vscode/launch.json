@@ -7,7 +7,7 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
+                          b   b                       b                           "name": "Debug",
             "program": "${workspaceFolder}/<executable file>",
             "args": [],
             "cwd": "${workspaceFolder}"
