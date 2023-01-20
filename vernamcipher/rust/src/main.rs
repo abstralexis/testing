@@ -38,7 +38,7 @@ fn gen_ascii_chars(length: u8) -> String {
     let arr: Vec<u8> = (0..length)
         .collect::<Vec<u8>>()
         .into_iter()
-        .map(|_| thread_rng().gen())
+        .map(|_: u8| thread_rng().gen())
         .collect::<Vec<u8>>();
     vecu8_to_string(arr)
 }
