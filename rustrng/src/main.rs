@@ -5,7 +5,7 @@ fn main() {
 }
 
 fn gen_ascii_chars(length: u32) -> String {
-    let mut arr: Vec<u32> = (0..length)
+    let arr: Vec<u32> = (0..length)
         .collect::<Vec<u32>>()
         .into_iter()
         .map(|_| thread_rng().gen())
