@@ -31,6 +31,10 @@ fn main() {
 }
 
 fn gen_ascii_chars(length: u8) -> String {
+    /*
+        Generate a random string of ascii characters to
+        a specified length
+     */
     let arr: Vec<u8> = (0..length)
         .collect::<Vec<u8>>()
         .into_iter()
@@ -48,6 +52,9 @@ fn to_binary(plaintext: String) -> Vec<u8> {
 }
 
 fn binary_xor(bin_text: Vec<u8>, bin_key: Vec<u8>) -> Vec<u8> {
+    /*
+        Binary XOR each item in a Vec<u8> with another Vec<u8>
+     */
     bin_text
         .iter()
         .zip(bin_key.iter())
@@ -56,6 +63,9 @@ fn binary_xor(bin_text: Vec<u8>, bin_key: Vec<u8>) -> Vec<u8> {
 }
 
 fn vecu8_to_string(bin_text: Vec<u8>) -> String {
+    /*
+        Convert a vec of u8 to a string
+     */
     bin_text
         .iter()
         .map(|x| match std::char::from_u32((*x).into()) {
