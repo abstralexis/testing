@@ -1,19 +1,16 @@
 /*
-    This program is a basic Vernam (One-time pad)
-    cipher implemented in Rust.
- */
+   This program is a basic Vernam (One-time pad)
+   cipher implemented in Rust.
+*/
 
-use rand::prelude::*;
 use rand::distributions::Alphanumeric;
+use rand::prelude::*;
 
 fn main() {
     // Let text be the input
     let text: String = "hello world".to_owned();
     let key: String = random_string(text.len());
-    // let key: String = gen_ascii_chars(
-    //     text.len().try_into().unwrap()
-    // );
-    
+
     // Convert to a u8 representation
     let text_bin: Vec<u8> = to_binary(text.clone());
     let key_bin: Vec<u8> = to_binary(key.clone());
@@ -32,7 +29,6 @@ fn main() {
     // Print what it can represent
     println!("{}", ciphertext);
 
-
     // Decrypt
     let cipher_bin: Vec<u8> = to_binary(ciphertext.clone());
     let cipher_xor_key: Vec<u8> = binary_xor(&cipher_bin, &key_bin);
@@ -44,7 +40,8 @@ fn main() {
 }
 
 fn random_string(n: usize) -> String {
-    thread_rng().sample_iter(&Alphanumeric)
+    thread_rng()
+        .sample_iter(&Alphanumeric)
         .take(n)
         .map(char::from)
         .collect()
@@ -52,16 +49,16 @@ fn random_string(n: usize) -> String {
 
 fn to_binary(plaintext: String) -> Vec<u8> {
     /*
-        Returns a Vec of u8s that represent the binary 
-        representation of every char in plaintext.
-     */
+       Returns a Vec of u8s that represent the binary
+       representation of every char in plaintext.
+    */
     plaintext.into_bytes()
 }
 
 fn binary_xor(bin_text: &Vec<u8>, bin_key: &Vec<u8>) -> Vec<u8> {
     /*
-        Binary XOR each item in a Vec<u8> with another Vec<u8>
-     */
+       Binary XOR each item in a Vec<u8> with another Vec<u8>
+    */
     bin_text
         .iter()
         .zip(bin_key.iter())
@@ -71,8 +68,8 @@ fn binary_xor(bin_text: &Vec<u8>, bin_key: &Vec<u8>) -> Vec<u8> {
 
 fn vecu8_to_string(bin_text: &Vec<u8>) -> String {
     /*
-        Convert a vec of u8 to a string
-     */
+       Convert a vec of u8 to a string
+    */
     bin_text
         .iter()
         .map(|x| match std::char::from_u32((*x).into()) {
