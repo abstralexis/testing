@@ -3,44 +3,51 @@
     cipher implemented in Rust.
  */
 
- use rand::prelude::*;
+use rand::prelude::*;
+use rand::distributions::Alphanumeric;
 
 fn main() {
     // Let text be the input
-    let text: String = "asigfoegofbioiba82u10u".to_owned();
-    let key: String = gen_ascii_chars(
-        text.len().try_into().unwrap()
-    );
+    let text: String = "hello world".to_owned();
+    let key: String = random_string(text.len());
+    // let key: String = gen_ascii_chars(
+    //     text.len().try_into().unwrap()
+    // );
     
     // Convert to a u8 representation
-    let text_bin: Vec<u8> = to_binary(text);
-    let key_bin: Vec<u8> = to_binary(key);
+    let text_bin: Vec<u8> = to_binary(text.clone());
+    let key_bin: Vec<u8> = to_binary(key.clone());
 
     // Xor the key and text
-    let text_xor_key: Vec<u8> = binary_xor(text_bin, key_bin);
+    let text_xor_key: Vec<u8> = binary_xor(&text_bin, &key_bin);
 
     // Convert back to string
-    let ciphertext: String = vecu8_to_string(text_xor_key);
+    let ciphertext: String = vecu8_to_string(&text_xor_key);
 
+    println!("Encrypted {} with key {}:", text, key);
     // Print the text such that it shows unicode sequences
     // That it cannot represent
     println!("{:?}", ciphertext);
 
     // Print what it can represent
     println!("{}", ciphertext);
+
+
+    // Decrypt
+    let cipher_bin: Vec<u8> = to_binary(ciphertext.clone());
+    let cipher_xor_key: Vec<u8> = binary_xor(&cipher_bin, &key_bin);
+    let plaintext: String = vecu8_to_string(&cipher_xor_key);
+
+    println!("Decrypted {} with key {}:", ciphertext, key);
+    println!("{:?}", plaintext);
+    println!("{}", plaintext);
 }
 
-fn gen_ascii_chars(length: u8) -> String {
-    /*
-        Generate a random string of ascii characters to
-        a specified length
-     */
-    let arr: Vec<u8> = (0..length)
-        .collect::<Vec<u8>>()
-        .into_iter()
-        .map(|_: u8| thread_rng().gen())
-        .collect::<Vec<u8>>();
-    vecu8_to_string(arr)
+fn random_string(n: usize) -> String {
+    thread_rng().sample_iter(&Alphanumeric)
+        .take(n)
+        .map(char::from)
+        .collect()
 }
 
 fn to_binary(plaintext: String) -> Vec<u8> {
@@ -51,7 +58,7 @@ fn to_binary(plaintext: String) -> Vec<u8> {
     plaintext.into_bytes()
 }
 
-fn binary_xor(bin_text: Vec<u8>, bin_key: Vec<u8>) -> Vec<u8> {
+fn binary_xor(bin_text: &Vec<u8>, bin_key: &Vec<u8>) -> Vec<u8> {
     /*
         Binary XOR each item in a Vec<u8> with another Vec<u8>
      */
@@ -62,7 +69,7 @@ fn binary_xor(bin_text: Vec<u8>, bin_key: Vec<u8>) -> Vec<u8> {
         .collect::<Vec<u8>>()
 }
 
-fn vecu8_to_string(bin_text: Vec<u8>) -> String {
+fn vecu8_to_string(bin_text: &Vec<u8>) -> String {
     /*
         Convert a vec of u8 to a string
      */
@@ -72,7 +79,6 @@ fn vecu8_to_string(bin_text: Vec<u8>) -> String {
             Some(c) => c,
             None => '�',
         })
-        .collect::<Vec<char>>()
-        .into_iter()
-        .collect::<String>()
+        .map(char::from)
+        .collect()
 }
