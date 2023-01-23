@@ -1,8 +1,8 @@
 use std::{collections::HashMap, env, fs};
 
 // Static array used for checking if a token is a keyword
-static KEYWORDS: &'static [&'static str] = &["iadd", "out", "imul", "isub", "idiv", "set"];
-static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv"];
+static KEYWORDS: &'static [&'static str] = &["iadd", "out", "imul", "isub", "idiv", "set", "equ"];
+static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv", "equ"];
 
 fn main() {
     let args: Vec<String> = env::args().collect(); // Collect args passed on run
@@ -53,6 +53,7 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
             "imul" => imul(&a, &b),
             "isub" => isub(&a, &b),
             "idiv" => idiv(&a, &b),
+            "equ" => equ(&a, &b),
             &_ => panic!("Invalid operation {}", first),
         };
         istore(&line[3], &val, Box::new(mem).as_mut());
@@ -162,4 +163,11 @@ fn idiv(a: &i32, b: &i32) -> i32 {
         panic!("Zero division error")
     }
     a / b
+}
+
+fn equ(a: &i32, b: &i32) -> i32 {
+    /*
+        1 if a == b else 0
+    */
+    (a == b) as i32
 }

@@ -7,6 +7,12 @@ set 10 zip;
 set 20 zop;
 iadd zip zop zap;
 
+set 5 bing;
+set bing bong;
+set 7 boing;
+equ bing bong biff;
+equ bong boing chip;
+
 out foo;
 out bar;
 out baz;
@@ -15,3 +21,9 @@ out qux;
 out zip;
 out zop;
 out zap;
+
+out bing;
+out bong;
+out boing;
+out biff;
+out chip;
