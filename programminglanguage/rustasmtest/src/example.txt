@@ -1,0 +1,2 @@
+iadd 1 2 $var;
+out $var;
