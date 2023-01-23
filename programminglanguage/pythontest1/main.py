@@ -101,4 +101,6 @@ if __name__ == "__main__":
     print(tokens)
     print(lexed)
     print(globals())
+    print(globals()["hello"].contents)
+    print(globals()["num"].contents)
     
