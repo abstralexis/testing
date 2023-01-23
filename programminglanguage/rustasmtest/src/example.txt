@@ -1,2 +1,6 @@
-iadd 1 2 $var;
-out $var;
+iadd 1 2 foo;
+iadd 3 4 bar;
+iadd foo bar baz;
+out foo;
+out bar;
+out baz;
