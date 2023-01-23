@@ -1,7 +1,17 @@
 iadd 1 2 foo;
-iadd 3 4 bar;
-iadd foo bar baz;
+imul foo 3 bar;
+isub bar foo baz;
+idiv baz foo qux;
+
+set 10 zip;
+set 20 zop;
+iadd zip zop zap;
 
 out foo;
 out bar;
 out baz;
+out qux;
+
+out zip;
+out zop;
+out zap;

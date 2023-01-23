@@ -1,7 +1,8 @@
 use std::{collections::HashMap, env, fs};
 
 // Static array used for checking if a token is a keyword
-static KEYWORDS: &'static [&'static str] = &["iadd", "out"];
+static KEYWORDS: &'static [&'static str] = &["iadd", "out", "imul", "isub", "idiv", "set"];
+static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv"];
 
 fn main() {
     let args: Vec<String> = env::args().collect(); // Collect args passed on run
@@ -36,20 +37,37 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
     let first: &str = &line[0][..];
 
     if !KEYWORDS.contains(&first) {
-        panic!("Invalid keyword")
+        panic!("Invalid keyword {}", first)
     }
 
-    if line[0] == "iadd" {
+    if INT_OPERATIONS.contains(&first) {
         let a = line[1]
             .parse::<i32>()
             .unwrap_or_else(|_| get_val(&line[1], mem));
         let b = line[2]
             .parse::<i32>()
             .unwrap_or_else(|_| get_val(&line[2], mem));
-        let val = iadd(&a, &b);
+
+        let val = match first {
+            "iadd" => iadd(&a, &b),
+            "imul" => imul(&a, &b),
+            "isub" => isub(&a, &b),
+            "idiv" => idiv(&a, &b),
+            &_ => panic!("Invalid operation {}", first),
+        };
         istore(&line[3], &val, Box::new(mem).as_mut());
-    } else if line[0] == "out" {
-        out(&line[1].to_owned(), mem);
+    } else {
+        match first {
+            "out" => out(&line[1].to_owned(), mem),
+            "set" => istore(
+                &line[2],
+                &line[1]
+                    .parse::<i32>()
+                    .unwrap_or_else(|_| get_val(&line[1], mem)),
+                Box::new(mem).as_mut(),
+            ),
+            &_ => panic!("Invalid operation {}", first),
+        }
     }
 }
 
@@ -117,7 +135,31 @@ fn tokenise_lines(lines: &Vec<String>) -> Vec<Vec<String>> {
 
 fn iadd(a: &i32, b: &i32) -> i32 {
     /*
-    Adding function for two i64.
+    Adding function for two i32.
     */
     a + b
+}
+
+fn imul(a: &i32, b: &i32) -> i32 {
+    /*
+        Multiply function for two i32
+    */
+    a * b
+}
+
+fn isub(a: &i32, b: &i32) -> i32 {
+    /*
+        Subtract function for i32
+    */
+    a - b
+}
+
+fn idiv(a: &i32, b: &i32) -> i32 {
+    /*
+        Divide two i32s
+    */
+    if b == &0 {
+        panic!("Zero division error")
+    }
+    a / b
 }
