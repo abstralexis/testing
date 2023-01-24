@@ -3,8 +3,11 @@ use std::{collections::HashMap, env, fs};
 // Static array used for checking if a token is a keyword
 static KEYWORDS: &'static [&'static str] = &[
     "iadd", "out", "imul", "isub", "idiv", "set", "equ", "//", "free", "le", "gr", "leq", "geq",
+    "jnz",
 ];
-static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv", "equ", "le", "gr", "leq", "geq",];
+static INT_OPERATIONS: &'static [&'static str] = &[
+    "iadd", "imul", "isub", "idiv", "equ", "le", "gr", "leq", "geq",
+];
 
 fn main() {
     let args: Vec<String> = env::args().collect(); // Collect args passed on run
@@ -74,7 +77,8 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
                 Box::new(mem).as_mut(),
             ),
             "free" => free(&line[1].to_owned(), mem),
-            "//" => (), // Comments
+            "//" => (),  // Comments
+            "jnz" => (), // jnz handled by run_lines
             &_ => panic!("Invalid operation {}", first),
         }
     }
@@ -133,8 +137,33 @@ fn run_lines(lines: &Vec<Vec<String>>, mem: &mut HashMap<String, i32>) -> () {
     /*
         Runs the lines
     */
-    for line in lines {
-        run_line(&line, mem);
+    let num_lines: usize = lines.len();
+    let mut i: usize = 0;
+    while i < num_lines {
+        run_line(&lines[i], mem);
+        let first: &str = &lines[i][0][..];
+
+        match first {
+            "//" => i += 1,
+            "jnz" => {
+                let a = lines[i][1]
+                    .parse::<i32>()
+                    .unwrap_or_else(|_| get_val(&lines[i][1], mem));
+                match a {
+                    0 => (),
+                    1 => {
+                        let b = lines[i][2]
+                            .parse::<i32>()
+                            .unwrap_or_else(|_| get_val(&lines[i][2], mem));
+                        i += b as usize;
+                    }
+                    _ => panic!("Non boolean value {}", a),
+                }
+            }
+            _ => {
+                i += 1;
+            }
+        };
     }
 }
 

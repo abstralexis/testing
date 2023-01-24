@@ -13,6 +13,8 @@ set 7 boing;
 equ bing bong biff;
 equ bong boing chip;
 
+// This is a comment!;
+
 le bing boing flop;
 gr boing bing flip;
 leq foo 3 flap;
@@ -38,7 +40,12 @@ out flip;
 out flap;
 out floing;
 
-free zop;
-// dump;
+set 1 true;
+set 0 false;
+jnz true 2;
+out false;
+out true;
 
-// This is a comment!;
+free zop;
+
+// dump;
