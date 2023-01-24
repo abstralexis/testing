@@ -1,8 +1,10 @@
 use std::{collections::HashMap, env, fs};
 
 // Static array used for checking if a token is a keyword
-static KEYWORDS: &'static [&'static str] = &["iadd", "out", "imul", "isub", "idiv", "set", "equ"];
-static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv", "equ"];
+static KEYWORDS: &'static [&'static str] = &[
+    "iadd", "out", "imul", "isub", "idiv", "set", "equ", "//", "free", "le", "gr", "leq", "geq",
+];
+static INT_OPERATIONS: &'static [&'static str] = &["iadd", "imul", "isub", "idiv", "equ", "le", "gr", "leq", "geq",];
 
 fn main() {
     let args: Vec<String> = env::args().collect(); // Collect args passed on run
@@ -54,6 +56,10 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
             "isub" => isub(&a, &b),
             "idiv" => idiv(&a, &b),
             "equ" => equ(&a, &b),
+            "le" => le(&a, &b),
+            "gr" => gr(&a, &b),
+            "leq" => leq(&a, &b),
+            "geq" => geq(&a, &b),
             &_ => panic!("Invalid operation {}", first),
         };
         istore(&line[3], &val, Box::new(mem).as_mut());
@@ -67,6 +73,8 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
                     .unwrap_or_else(|_| get_val(&line[1], mem)),
                 Box::new(mem).as_mut(),
             ),
+            "free" => free(&line[1].to_owned(), mem),
+            "//" => (), // Comments
             &_ => panic!("Invalid operation {}", first),
         }
     }
@@ -77,6 +85,48 @@ fn get_val(var: &String, mem: &mut HashMap<String, i32>) -> i32 {
         Some(i) => return *i,
         None => panic!("No such variable name {}", var),
     };
+}
+
+fn free(var: &String, mem: &mut HashMap<String, i32>) -> () {
+    /*
+        Frees a space in memory with name var
+    */
+    mem.remove(var);
+}
+
+// fn dump(mem: &mut HashMap<String, i32>) -> () {
+//     /*
+//         DBG output whats in memory
+//     */
+//     dbg!(mem);
+// }
+
+fn le(a: &i32, b: &i32) -> i32 {
+    /*
+        a less than b
+    */
+    (a < b) as i32
+}
+
+fn gr(a: &i32, b: &i32) -> i32 {
+    /*
+        a greater than b
+    */
+    (a > b) as i32
+}
+
+fn leq(a: &i32, b: &i32) -> i32 {
+    /*
+        a less than or equal to b
+    */
+    (a <= b) as i32
+}
+
+fn geq(a: &i32, b: &i32) -> i32 {
+    /*
+        a greater than or equal to b
+    */
+    (a >= b) as i32
 }
 
 fn run_lines(lines: &Vec<Vec<String>>, mem: &mut HashMap<String, i32>) -> () {

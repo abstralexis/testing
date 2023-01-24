@@ -13,6 +13,11 @@ set 7 boing;
 equ bing bong biff;
 equ bong boing chip;
 
+le bing boing flop;
+gr boing bing flip;
+leq foo 3 flap;
+geq bar baz floing;
+
 out foo;
 out bar;
 out baz;
@@ -27,3 +32,13 @@ out bong;
 out boing;
 out biff;
 out chip;
+
+out flop;
+out flip;
+out flap;
+out floing;
+
+free zop;
+// dump;
+
+// This is a comment!;
