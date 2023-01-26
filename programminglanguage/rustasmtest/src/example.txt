@@ -46,6 +46,12 @@ jnz true 2;
 out false;
 out true;
 
+set 21 didnothing;
+set 42 jumped;
+jmp 2;
+out didnothing;
+out jumped;
+
 free zop;
 
 // dump;
