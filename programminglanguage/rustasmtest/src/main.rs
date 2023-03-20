@@ -3,7 +3,7 @@ use std::{collections::HashMap, env, fs};
 // Static array used for checking if a token is a keyword
 static KEYWORDS: &'static [&'static str] = &[
     "iadd", "out", "imul", "isub", "idiv", "set", "equ", "//", "free", "le", "gr", "leq", "geq",
-    "jnz",
+    "jnz", "jmp",
 ];
 static INT_OPERATIONS: &'static [&'static str] = &[
     "iadd", "imul", "isub", "idiv", "equ", "le", "gr", "leq", "geq",
@@ -79,6 +79,7 @@ fn run_line(line: &Vec<String>, mem: &mut HashMap<String, i32>) -> () {
             "free" => free(&line[1].to_owned(), mem),
             "//" => (),  // Comments
             "jnz" => (), // jnz handled by run_lines
+            "jmp" => (), // jmp handled by run_lines
             &_ => panic!("Invalid operation {}", first),
         }
     }
@@ -159,6 +160,12 @@ fn run_lines(lines: &Vec<Vec<String>>, mem: &mut HashMap<String, i32>) -> () {
                     }
                     _ => panic!("Non boolean value {}", a),
                 }
+            }
+            "jmp" => {
+                let a = lines[i][1]
+                    .parse::<i32>()
+                    .unwrap_or_else(|_| get_val(&lines[i][1], mem));
+                i += a as usize;
             }
             _ => {
                 i += 1;
