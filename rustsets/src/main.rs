@@ -1,5 +1,17 @@
 use std::hash::Hash;
 
+pub trait SetType<T: Ord + Hash + Clone> {
+    fn eq(&self, other: &Self) -> bool;
+    fn new() -> Self;
+    fn push(&self, items: &Vec<T>) -> Set<T>;
+    fn remove_duplicates(&self) -> Set<T>;
+    fn get_items(&self) -> Vec<T>;
+    fn union(&self, set: &Set<T>) -> Set<T>;
+    fn intersect(&self, set: &Set<T>) -> Set<T>;
+    fn subset(&self, set: &Set<T>) -> bool;
+    fn proper_subset(&self, set: &Set<T>) -> bool;
+}
+
 pub struct Set<T> {
     items: Vec<T>,
 }
